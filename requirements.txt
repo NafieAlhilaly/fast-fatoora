@@ -4,3 +4,4 @@ requests==2.25.1
 fastapi
 gunicorn
 uvicorn
+qrcode
