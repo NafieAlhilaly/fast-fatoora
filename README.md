@@ -52,3 +52,7 @@ tax_amount ="15.00"
 res = requests.get(f"https://api-fatoora.herokuapp.com/to_base64/{seller_name},{tax_number},{invoice_date},{total_amount},{tax_amount}")
 print(res.json())
 ```
+expected output 
+```
+{'TLV_to_base64': 'AQVTYWxsYQIKMTIzNDU2Nzg5MQMUMjAyMS0wNy0xMlQxNDoyNTowOVoEBjEwMC4wMAUFMTUuMDA='}
+```
