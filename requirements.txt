@@ -5,3 +5,4 @@ fastapi
 gunicorn
 uvicorn
 qrcode
+Pillow==8.4.0
