@@ -26,6 +26,8 @@ and to generate QR-code
 https://api-fatoora.herokuapp.com/to_qrcode_image/Nafie,1234567893,2021-07-12T14:25:09Z,120.00,20.00
 ```
 [try it](https://api-fatoora.herokuapp.com/to_qrcode_image/Nafie,1234567893,2021-07-12T14:25:09Z,120.00,20.00)
+
+
 ------------
 
 getting base64 using python 
