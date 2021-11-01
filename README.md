@@ -6,34 +6,32 @@
 # api-fatoora
 API to help generating QR-code for ZATCA's e-invoice known as Fatoora with any programming language
 
-_Disclaimer: this API is not **secure** yet, please dont share sensitive information._
+> _Disclaimer: this API is not **secure** yet, please dont share sensitive information._
 
 ---------
 ## how to use it 
-the base is 
+Basicly you can get the result as json from any language with a simple http request.
 ```
+# base api
 https://api-fatoora.herokuapp.com/
-```
 
-after you can add 
-```
-  to_base64/{seller_name},{tax_number},{invoice_date},{total_amount},{tax_amount}
-```
-to convert information to base64 encode
-```
-  https://api-fatoora.herokuapp.com/to_base64/Nafie,1234567893,2021-07-12T14:25:09Z,120.00,20.00
-```
-[try it](https://api-fatoora.herokuapp.com/to_base64/Nafie,1234567893,2021-07-12T14:25:09Z,120.00,20.00)
+# base64 converting endpoint
+to_base64/{seller_name},{tax_number},{invoice_date},{total_amount},{tax_amount}
 
-------------------
-and to generate QR-code
-```
+# full base64 url
+https://api-fatoora.herokuapp.com/to_base64/Nafie,1234567893,2021-07-12T14:25:09Z,120.00,20.00
+
+
+# qr-code endpoint
 /to_qrcode_image/{seller_name},{tax_number},{invoice_date},{total_amount},{tax_amount}
-```
-```
+
+# full qr-code endpoint
 https://api-fatoora.herokuapp.com/to_qrcode_image/Nafie,1234567893,2021-07-12T14:25:09Z,120.00,20.00
 ```
-[try it](https://api-fatoora.herokuapp.com/to_qrcode_image/Nafie,1234567893,2021-07-12T14:25:09Z,120.00,20.00)
+
+🔗[try base64](https://api-fatoora.herokuapp.com/to_base64/Nafie,1234567893,2021-07-12T14:25:09Z,120.00,20.00)
+
+🔗[try QR-code](https://api-fatoora.herokuapp.com/to_qrcode_image/Nafie,1234567893,2021-07-12T14:25:09Z,120.00,20.00)
 
 
 ------------
