@@ -17,7 +17,12 @@ to convert information to base64 encode
 ```
 [try it](https://api-fatoora.herokuapp.com/to_base64/Nafie,1234567893,2021-07-12T14:25:09Z,120.00,20.00)
 
+------------------
 and to generate QR-code
 ```
 /to_qrcode_image/{seller_name},{tax_number},{invoice_date},{total_amount},{tax_amount}
 ```
+```
+https://api-fatoora.herokuapp.com/to_qrcode_image/Nafie,1234567893,2021-07-12T14:25:09Z,120.00,20.00
+```
+[try it](https://api-fatoora.herokuapp.com/to_qrcode_image/Nafie,1234567893,2021-07-12T14:25:09Z,120.00,20.00)
