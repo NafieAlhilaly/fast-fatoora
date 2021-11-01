@@ -1,6 +1,9 @@
 # api-fatoora
 API to help generating QR-code for ZATCA's e-invoice known as Fatoora with any programming language
 
+_Disclaimer: this API is not **secure** yet, please dont share sensitive information._
+
+---------
 ## how to use it 
 the base is 
 ```
