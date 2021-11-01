@@ -1,5 +1,5 @@
 uttlv==0.6.0
-opencv-python==4.5.4.58
+opencv-python-headless
 requests==2.25.1
 fastapi
 gunicorn
