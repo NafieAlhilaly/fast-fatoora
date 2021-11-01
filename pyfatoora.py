@@ -13,8 +13,6 @@ The minimum seller inforamion required are :
 - Invoice total amount.
 - Tax amount.
 
-
-more information about ZATCA e-invoice @ https://zatca.gov.sa/ar/E-Invoicing/Pages/default.aspx
 """
 
 from uttlv import TLV
