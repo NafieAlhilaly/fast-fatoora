@@ -1,12 +1,15 @@
 import os
 from typing import Optional
 from pyfatoora import PyFatoora
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.responses import FileResponse
 from starlette.background import BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.templating import Jinja2Templates
+from fastapi.responses import HTMLResponse
 
 app = FastAPI()
+templates = Jinja2Templates(directory="templates")
 
 # cors configuration for all ports
 origins = [
@@ -19,6 +22,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+@app.get("/", response_class=HTMLResponse)
+async def home(request: Request):
+    return templates.TemplateResponse("index.html", {"request":request})
 
 
 @app.get("/to_base64/{seller_name},{tax_number},{invoice_date},{total_amount},{tax_amount}")
