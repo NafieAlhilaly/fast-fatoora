@@ -2,7 +2,7 @@
   <img align="center" src="https://github.com/NafieAlhilaly/api-fatoora/blob/main/images/secret-qr-code.png" width=300/>
 </p>
 
-
+You can try it @ [api-fatoora](https://api-fatoora.herokuapp.com/)
 # api-fatoora
 API to help generating QR-code for ZATCA's e-invoice known as Fatoora with any programming language
 
