@@ -6,3 +6,4 @@ gunicorn
 uvicorn
 qrcode
 Pillow==8.4.0
+python-multipart==0.0.5

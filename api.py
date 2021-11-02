@@ -1,9 +1,10 @@
 import os
 from typing import Optional
 from pyfatoora import PyFatoora
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, Form
 from fastapi.responses import FileResponse
 from starlette.background import BackgroundTasks
+from starlette.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
@@ -27,6 +28,21 @@ app.add_middleware(
 async def home(request: Request):
     return templates.TemplateResponse("index.html", {"request":request})
 
+@app.post("/submitform")
+async def handle_form(seller_name: str = Form(...), 
+                    tax_number: str = Form(...), 
+                    invoice_date: str = Form(...), 
+                    total_amount: str = Form(...), 
+                    tax_amount: str = Form(...),
+                    render_type: str = Form(...)):
+    if render_type == "1":
+        response = RedirectResponse(url= "/to_base64/{seller_name},{tax_number},{invoice_date},{total_amount},{tax_amount}")
+        response.status_code = 302
+        return response
+
+    response = RedirectResponse(url= "/to_qrcode_image/{seller_name},{tax_number},{invoice_date},{total_amount},{tax_amount}")
+    response.status_code = 302
+    return response
 
 @app.get("/to_base64/{seller_name},{tax_number},{invoice_date},{total_amount},{tax_amount}")
 def base64_endpoint(seller_name, tax_number, invoice_date, total_amount, tax_amount):
