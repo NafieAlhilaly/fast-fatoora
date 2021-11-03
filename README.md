@@ -28,7 +28,7 @@ data = {
 
 data = json.dumps(data)
 
-response = requests.post('http://127.0.0.1:8000/to_base64', data=data)
+response = requests.post('https://api-fatoora.herokuapp.com//to_base64', data=data)
 print(response.json())
 # result : {'TLV_to_base64': 'AQVuYWZpZQIJODc2NTU0Njc0Awg4NzV0NjU1NAQDMjAwBQIzMA=='}
 ```
@@ -49,6 +49,6 @@ data = {
 
 data = json.dumps(data)
 
-response = requests.post('http://127.0.0.1:8000/to_qrcode_image', data=data)
+response = requests.post('https://api-fatoora.herokuapp.com//to_qrcode_image', data=data)
 response = response.content()
 ```
