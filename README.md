@@ -3,6 +3,8 @@
 </p>
 
 You can try it @ [api-fatoora](https://api-fatoora.herokuapp.com/)
+
+Learn more about [ZATCA's E-invoice](https://zatca.gov.sa/en/E-Invoicing/Introduction/Pages/What-is-e-invoicing.aspx) 
 # api-fatoora
 API to help generating QR-code for ZATCA's e-invoice known as Fatoora with any programming language
 
