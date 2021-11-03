@@ -31,12 +31,14 @@ async def home(request: Request):
 @app.post("/submitform")
 async def handle_form(seller_name: str = Form(...), 
                     tax_number: str = Form(...), 
-                    invoice_date: str = Form(...), 
+                    invoice_date: str = Form(...),
+                    invoice_time: str = Form(...), 
                     total_amount: str = Form(...), 
                     tax_amount: str = Form(...),
                     render_type: str = Form(...)):
+    date = str(invoice_date) + str(invoice_time)
     if render_type == "1":
-        response = RedirectResponse(url= "/to_base64/{seller_name},{tax_number},{invoice_date},{total_amount},{tax_amount}")
+        response = RedirectResponse(url= "/to_base64/{seller_name},{tax_number},{date},{total_amount},{tax_amount}")
         response.status_code = 302
         return response
 
