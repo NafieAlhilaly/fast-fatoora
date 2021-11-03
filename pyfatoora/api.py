@@ -57,13 +57,15 @@ async def qrcode_image_endpoint(invoice_data: InvoiceData, background_tasks: Bac
     return FileResponse("qr_code_img.png", background=background_tasks)
 
 @app.post("/submitform")
-def handle_form(seller_name: str = Form(...), 
+def handle_form(background_tasks: BackgroundTasks,
+                    seller_name: str = Form(...), 
                     tax_number: str = Form(...), 
                     invoice_date: str = Form(...),
                     invoice_time: str = Form(...), 
                     total_amount: str = Form(...), 
                     tax_amount: str = Form(...),
-                    render_type: str = Form(...)):
+                    render_type: str = Form(...)
+                ):
 
     date = str(invoice_date) + str(invoice_time)
     data = {
@@ -76,4 +78,15 @@ def handle_form(seller_name: str = Form(...),
     data = json.dumps(data)
     if render_type == "1":
         return requests.post('http://127.0.0.1:8000/to_base64', data=data).json()
-    return "currently facing a problem"
+    
+    fatoora = PyFatoora(seller_name,
+        tax_number,
+        invoice_date,
+        total_amount,
+        tax_amount)
+    
+    qrcode_image = fatoora.render_qrcode_image()
+    qrcode_image.save("qr_code_img.png")
+
+    background_tasks.add_task(os.remove, "qr_code_img.png")
+    return FileResponse("qr_code_img.png", background=background_tasks)
