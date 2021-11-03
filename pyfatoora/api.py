@@ -1,4 +1,6 @@
 import os
+import json
+import requests
 from typing import Optional
 from .pyfatoora import PyFatoora
 from .info import InvoiceData
@@ -29,26 +31,8 @@ app.add_middleware(
 async def home(request: Request):
     return templates.TemplateResponse("index.html", {"request":request})
 
-@app.post("/submitform")
-async def handle_form(seller_name: str = Form(...), 
-                    tax_number: str = Form(...), 
-                    invoice_date: str = Form(...),
-                    invoice_time: str = Form(...), 
-                    total_amount: str = Form(...), 
-                    tax_amount: str = Form(...),
-                    render_type: str = Form(...)):
-    date = str(invoice_date) + str(invoice_time)
-    if render_type == "1":
-        response = RedirectResponse(url= "/to_base64/{seller_name},{tax_number},{date},{total_amount},{tax_amount}")
-        response.status_code = 302
-        return response
-
-    response = RedirectResponse(url= "/to_qrcode_image/{seller_name},{tax_number},{invoice_date},{total_amount},{tax_amount}")
-    response.status_code = 302
-    return response
-
 @app.post("/to_base64")
-def base64_endpoint(invoice_data : InvoiceData):
+async def base64_endpoint(invoice_data : InvoiceData):
     fatoora = PyFatoora(invoice_data.seller_name,
         invoice_data.tax_number,
         invoice_data.invoice_date,
@@ -58,17 +42,38 @@ def base64_endpoint(invoice_data : InvoiceData):
     tlv_as_base64 = fatoora.tlv_to_base64()
     return {"TLV_to_base64": tlv_as_base64}
 
-@app.get("/to_qrcode_image/{seller_name},{tax_number},{invoice_date},{total_amount},{tax_amount}")
-def qrcode_image_endpoint(seller_name, tax_number, invoice_date, total_amount, tax_amount, background_tasks: BackgroundTasks):
-    fatoora = PyFatoora(seller_name,
-        tax_number,
-        invoice_date,
-        total_amount,
-        tax_amount)
+@app.post("/to_qrcode_image")
+async def qrcode_image_endpoint(invoice_data: InvoiceData, background_tasks: BackgroundTasks):
+    fatoora = PyFatoora(invoice_data.seller_name,
+        invoice_data.tax_number,
+        invoice_data.invoice_date,
+        invoice_data.total_amount,
+        invoice_data.tax_amount)
     
     qrcode_image = fatoora.render_qrcode_image()
     qrcode_image.save("qr_code_img.png")
 
     background_tasks.add_task(os.remove, "qr_code_img.png")
     return FileResponse("qr_code_img.png", background=background_tasks)
-    
+
+@app.post("/submitform")
+def handle_form(seller_name: str = Form(...), 
+                    tax_number: str = Form(...), 
+                    invoice_date: str = Form(...),
+                    invoice_time: str = Form(...), 
+                    total_amount: str = Form(...), 
+                    tax_amount: str = Form(...),
+                    render_type: str = Form(...)):
+
+    date = str(invoice_date) + str(invoice_time)
+    data = {
+            "seller_name": seller_name,
+            "tax_number": tax_number,
+            "invoice_date": invoice_date,
+            "total_amount": total_amount,
+            "tax_amount": tax_amount
+        }
+    data = json.dumps(data)
+    if render_type == "1":
+        return requests.post('http://127.0.0.1:8000/to_base64', data=data).json()
+    return "currently facing a problem"
