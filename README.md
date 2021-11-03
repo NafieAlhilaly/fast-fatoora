@@ -2,7 +2,7 @@
   <img align="center" src="https://github.com/NafieAlhilaly/api-fatoora/blob/main/images/secret-qr-code.png" width=300/>
 </p>
 
-You can try it @ [api-fatoora](https://api-fatoora.herokuapp.com/)
+You can try it with simple ui @ [api-fatoora](https://api-fatoora.herokuapp.com/)
 
 Learn more about [ZATCA's E-invoice](https://zatca.gov.sa/en/E-Invoicing/Introduction/Pages/What-is-e-invoicing.aspx) 
 # api-fatoora
@@ -12,47 +12,22 @@ API to help generating QR-code for ZATCA's e-invoice known as Fatoora with any p
 
 ---------
 ## how to use it 
-Basicly you can get the result as json from any language with a simple http request.
-```
-# base api
-https://api-fatoora.herokuapp.com/
-
-# base64 converting endpoint
-to_base64/{seller_name},{tax_number},{invoice_date},{total_amount},{tax_amount}
-
-# full base64 url
-https://api-fatoora.herokuapp.com/to_base64/Nafie,1234567893,2021-07-12T14:25:09Z,120.00,20.00
-
-
-# qr-code endpoint
-/to_qrcode_image/{seller_name},{tax_number},{invoice_date},{total_amount},{tax_amount}
-
-# full qr-code endpoint
-https://api-fatoora.herokuapp.com/to_qrcode_image/Nafie,1234567893,2021-07-12T14:25:09Z,120.00,20.00
-```
-
-🔗[try base64](https://api-fatoora.herokuapp.com/to_base64/Nafie,1234567893,2021-07-12T14:25:09Z,120.00,20.00)
-
-🔗[try QR-code](https://api-fatoora.herokuapp.com/to_qrcode_image/Nafie,1234567893,2021-07-12T14:25:09Z,120.00,20.00)
-
-
-------------
-
-getting base64 using python 
-```
+The simplest way to get started is to send POST request with json of your data, here an example using python requests
+```python
 import requests
+import json
 
-# invoice/seller information
-seller_name = "Salla"
-tax_number = "1234567891"
-invoice_date = "2021-07-12T14:25:09Z"
-total_amount = "100.00"
-tax_amount ="15.00"
+data = {
+    "seller_name": "nafie",
+    "tax_number": "876554674",
+    "invoice_date": "875t6554",
+    "total_amount": "200",
+    "tax_amount": "30"   
+}
 
-res = requests.get(f"https://api-fatoora.herokuapp.com/to_base64/{seller_name},{tax_number},{invoice_date},{total_amount},{tax_amount}")
-print(res.json())
-```
-expected output 
-```
-{'TLV_to_base64': 'AQVTYWxsYQIKMTIzNDU2Nzg5MQMUMjAyMS0wNy0xMlQxNDoyNTowOVoEBjEwMC4wMAUFMTUuMDA='}
+data = json.dumps(data)
+
+response = requests.post('http://127.0.0.1:8000/to_base64', data=data)
+print(response.json())
+# result : {'TLV_to_base64': 'AQVuYWZpZQIJODc2NTU0Njc0Awg4NzV0NjU1NAQDMjAwBQIzMA=='}
 ```
