@@ -35,7 +35,8 @@ print(response.json())
 
 #### Convert data to QR-Code
 `POST /to_qrcode_image/`
-```pythonfrom PIL import Image
+```python
+from PIL import Image
 import io
 import requests
 import json
