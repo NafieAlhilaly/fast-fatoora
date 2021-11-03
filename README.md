@@ -35,7 +35,8 @@ print(response.json())
 
 #### Convert data to QR-Code
 `POST /to_qrcode_image/`
-```python
+```pythonfrom PIL import Image
+import io
 import requests
 import json
 
@@ -48,7 +49,12 @@ data = {
 }
 
 data = json.dumps(data)
+response = requests.post('http://127.0.0.1:8000/to_qrcode_image', data=data)
 
-response = requests.post('https://api-fatoora.herokuapp.com//to_qrcode_image', data=data)
-response = response.content()
+# get image response as bytes
+image_data = response.content
+
+# convert bytes to image using PIL.Image
+image = Image.open(io.BytesIO(image_data))
+image.show()
 ```
