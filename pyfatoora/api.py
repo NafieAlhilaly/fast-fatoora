@@ -1,6 +1,6 @@
 import os
 from typing import Optional
-from pyfatoora import PyFatoora
+from .pyfatoora import PyFatoora
 from fastapi import FastAPI, Request, Form
 from fastapi.responses import FileResponse
 from starlette.background import BackgroundTasks
