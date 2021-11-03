@@ -68,22 +68,16 @@ def handle_form(background_tasks: BackgroundTasks,
                 ):
 
     date = str(invoice_date) + str(invoice_time)
-    data = {
-            "seller_name": seller_name,
-            "tax_number": tax_number,
-            "invoice_date": invoice_date,
-            "total_amount": total_amount,
-            "tax_amount": tax_amount
-        }
-    data = json.dumps(data)
-    if render_type == "1":
-        return requests.post('http://127.0.0.1:8000/to_base64', data=data).json()
     
     fatoora = PyFatoora(seller_name,
         tax_number,
         invoice_date,
         total_amount,
         tax_amount)
+    
+    if render_type == "1":
+        tlv_as_base64 = fatoora.tlv_to_base64()
+        return {"TLV_to_base64": tlv_as_base64}
     
     qrcode_image = fatoora.render_qrcode_image()
     qrcode_image.save("qr_code_img.png")
