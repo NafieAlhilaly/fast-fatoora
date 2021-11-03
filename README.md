@@ -50,5 +50,5 @@ data = {
 data = json.dumps(data)
 
 response = requests.post('http://127.0.0.1:8000/to_qrcode_image', data=data)
-print(response)
+response = response.content()
 ```
