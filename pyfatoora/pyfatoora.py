@@ -14,7 +14,7 @@ The minimum seller inforamion required are :
 - Tax amount.
 
 """
-
+from typing import Optional
 from uttlv import TLV
 import base64
 import qrcode

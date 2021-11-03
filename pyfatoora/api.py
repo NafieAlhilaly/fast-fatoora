@@ -1,6 +1,7 @@
 import os
 from typing import Optional
 from .pyfatoora import PyFatoora
+from .info import InvoiceData
 from fastapi import FastAPI, Request, Form
 from fastapi.responses import FileResponse
 from starlette.background import BackgroundTasks
@@ -46,17 +47,16 @@ async def handle_form(seller_name: str = Form(...),
     response.status_code = 302
     return response
 
-@app.get("/to_base64/{seller_name},{tax_number},{invoice_date},{total_amount},{tax_amount}")
-def base64_endpoint(seller_name, tax_number, invoice_date, total_amount, tax_amount):
-    fatoora = PyFatoora(seller_name,
-        tax_number,
-        invoice_date,
-        total_amount,
-        tax_amount)
+@app.post("/to_base64")
+def base64_endpoint(invoice_data : InvoiceData):
+    fatoora = PyFatoora(invoice_data.seller_name,
+        invoice_data.tax_number,
+        invoice_data.invoice_date,
+        invoice_data.total_amount,
+        invoice_data.tax_amount)
 
     tlv_as_base64 = fatoora.tlv_to_base64()
     return {"TLV_to_base64": tlv_as_base64}
-
 
 @app.get("/to_qrcode_image/{seller_name},{tax_number},{invoice_date},{total_amount},{tax_amount}")
 def qrcode_image_endpoint(seller_name, tax_number, invoice_date, total_amount, tax_amount, background_tasks: BackgroundTasks):
