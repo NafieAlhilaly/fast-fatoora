@@ -34,7 +34,7 @@ print(response.json())
 ```
 
 #### Convert data to QR-Code
-`POST //to_qrcode_image/`
+`POST /to_qrcode_image/`
 ```python
 import requests
 import json
