@@ -30,7 +30,7 @@ data = {
 
 data = json.dumps(data)
 
-response = requests.post('https://api-fatoora.herokuapp.com//to_base64', data=data)
+response = requests.post('https://api-fatoora.herokuapp.com/to_base64', data=data)
 print(response.json())
 # result : {'TLV_to_base64': 'AQVuYWZpZQIJODc2NTU0Njc0Awg4NzV0NjU1NAQDMjAwBQIzMA=='}
 ```
