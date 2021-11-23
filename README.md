@@ -1,11 +1,13 @@
+# api-fatoora
+
 <p align="center">
   <img align="center" src="https://github.com/NafieAlhilaly/api-fatoora/blob/main/images/secret-qr-code.png" width=300/>
 </p>
 
 You can try it with simple ui @ [api-fatoora](https://api-fatoora.herokuapp.com/)
-Learn more about [ZATCA's E-invoice](https://zatca.gov.sa/en/E-Invoicing/Introduction/Pages/What-is-e-invoicing.aspx) 
-# api-fatoora
-API to help generating QR-code for ZATCA's e-invoice known as Fatoora with any programming language
+
+
+api-fatoora is an open API to help generating QR-code for [ZATCA's e-invoice known as "Fatoorah"](https://zatca.gov.sa/en/E-Invoicing/Introduction/Pages/What-is-e-invoicing.aspx) with any programming language
 > _Disclaimer: this API is not **secure** yet, please dont post sensitive information._
 
 ---------
@@ -28,7 +30,7 @@ data = {
 
 data = json.dumps(data)
 
-response = requests.post('https://api-fatoora.herokuapp.com//to_base64', data=data)
+response = requests.post('https://api-fatoora.herokuapp.com/to_base64', data=data)
 print(response.json())
 # result : {'TLV_to_base64': 'AQVuYWZpZQIJODc2NTU0Njc0Awg4NzV0NjU1NAQDMjAwBQIzMA=='}
 ```
@@ -36,6 +38,8 @@ print(response.json())
 #### Convert data to QR-Code
 `POST /to_qrcode_image/`
 ```python
+from PIL import Image
+import io
 import requests
 import json
 
@@ -48,7 +52,12 @@ data = {
 }
 
 data = json.dumps(data)
+response = requests.post('http://127.0.0.1:8000/to_qrcode_image', data=data)
 
-response = requests.post('https://api-fatoora.herokuapp.com//to_qrcode_image', data=data)
-response = response.content()
+# get image response as bytes
+image_data = response.content
+
+# convert bytes to image using PIL.Image
+image = Image.open(io.BytesIO(image_data))
+image.show()
 ```
