@@ -1,5 +1,4 @@
 import os
-from typing import Optional
 from .pyfatoora import PyFatoora
 from .info import InvoiceData
 from fastapi import FastAPI, Request, Form

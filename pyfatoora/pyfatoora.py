@@ -63,7 +63,7 @@ class PyFatoora:
         return tlv_as_base64
 
 
-    def render_qrcode_image(self):
+    def render_qrcode_image(self) -> qrcode:
         """
         render base64 tlv result to a QR-code image
 
