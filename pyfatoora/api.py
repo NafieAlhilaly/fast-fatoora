@@ -1,6 +1,4 @@
 import os
-import json
-import requests
 from typing import Optional
 from .pyfatoora import PyFatoora
 from .info import InvoiceData
