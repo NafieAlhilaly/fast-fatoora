@@ -63,7 +63,7 @@ def handle_form(background_tasks: BackgroundTasks,
                     tax_amount: str = Form(...),
                     render_type: str = Form(...)
                 ):
-
+    # find use for it
     date = str(invoice_date) + str(invoice_time)
     
     fatoora = PyFatoora(seller_name,
@@ -79,5 +79,7 @@ def handle_form(background_tasks: BackgroundTasks,
     qrcode_image = fatoora.render_qrcode_image()
     qrcode_image.save("qr_code_img.png")
 
+    # background task to delete the created image from the server
+    # after it return to the user
     background_tasks.add_task(os.remove, "qr_code_img.png")
     return FileResponse("qr_code_img.png", background=background_tasks)
