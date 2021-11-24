@@ -28,7 +28,7 @@ async def base64_endpoint(invoice_data : InvoiceData):
     tlv_as_base64 = fatoora.tlv_to_base64()
     return {"TLV_to_base64": tlv_as_base64}
 
-@app.post("/to_qrcode_image")
+@app.post("/to_qrcode_image", response_class=FileResponse)
 async def qrcode_image_endpoint(invoice_data: InvoiceData, background_tasks: BackgroundTasks):
     fatoora = PyFatoora(invoice_data.seller_name,
         invoice_data.tax_number,
