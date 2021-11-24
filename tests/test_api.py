@@ -41,7 +41,7 @@ def test_qrcode_image_endpoint():
 
     assert response.status_code == 200
 
-def test_handle_form():
+def test_handle_form_missing_data():
     """Test dandling missing form data"""
 
     response = client.post("/submitform")
