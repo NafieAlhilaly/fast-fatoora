@@ -18,7 +18,6 @@ from uttlv import TLV
 import base64
 import qrcode
 import cv2
-from typing import Optional
 
 
 class PyFatoora:
