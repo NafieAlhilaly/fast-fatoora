@@ -20,8 +20,23 @@ def test_404():
 
     assert response.status_code == 404
 
-def test_qrcode_image_endpoint():
-    """ Test enpoint without geving it information"""
+def test_qrcode_image_endpoint_without_inputs():
+    """ Test with missing data or if the resuest was GET instead of POST"""
     response = client.post("/to_qrcode_image")
 
     assert response.status_code == 422
+
+def test_qrcode_image_endpoint():
+    """Test with expected data"""
+
+    data = {
+        "seller_name": "Nafie",
+        "tax_number": "49823534234",
+        "invoice_date": "3465768",
+        "total_amount": "972.1",
+        "tax_amount": "99.99"
+    }
+
+    response = client.post("/to_qrcode_image", json=data)
+
+    assert response.status_code == 200
