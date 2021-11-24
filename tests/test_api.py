@@ -40,3 +40,10 @@ def test_qrcode_image_endpoint():
     response = client.post("/to_qrcode_image", json=data)
 
     assert response.status_code == 200
+
+def test_handle_form():
+    """Test dandling missing form data"""
+
+    response = client.post("/submitform")
+
+    assert response.status_code == 422
