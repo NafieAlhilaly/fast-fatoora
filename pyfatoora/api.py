@@ -52,7 +52,6 @@ def handle_form(background_tasks: BackgroundTasks,
                     tax_amount: str = Form(...),
                     render_type: str = Form(...)
                 ):
-    # find use for it
     date = str(invoice_date) + str(invoice_time)
     
     fatoora = PyFatoora(seller_name,
