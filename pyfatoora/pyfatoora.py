@@ -52,8 +52,6 @@ class PyFatoora:
 
         tlv_as_byte_array = self.tags.to_byte_array()
 
-        tlv_lst = [f"{tag}{len(self.tags[tag])}{self.tags[tag]}" for tag in self.tags]
-
         tlv_as_base64 = base64.b64encode(tlv_as_byte_array)
         tlv_as_base64 = tlv_as_base64.decode("ascii")
 
