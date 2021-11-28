@@ -87,32 +87,4 @@ class PyFatoora:
             seller_info[str(tag)] = tag_value
         return seller_info
 
-    def read_qrcode_image(self, image_url:str, dictionary=True) -> str or dict:
-        """
-        extract seller information from qr-code image.
 
-        :param image_url: 
-            a qr-code image path or url
-        :param dictionary: 
-            return result as a dictionary if True,
-            else return base64 code.
-        :return: 
-            str base64 code, or 
-            dictionary contains seller information
-        """
-        # read the QRCODE image
-        image = cv2.imread(image_url)
-
-        # initialize the cv2 QRCode detector
-        detector = cv2.QRCodeDetector()
-
-        if image :
-            # detect and decode
-            data, vertices_array, binary_qrcode = detector.detectAndDecode(image)
-        else:
-            return "ivalid image url"
-        
-        if dictionary:
-            return self.decode_tlv(data)
-        else:
-            return data
