@@ -23,7 +23,7 @@ import cv2
 class PyFatoora:
     """
     This class will help transform given seller information 
-    to a QR-code image as part of ZATCA requorments for impelemntation of
+    to a QR-code image as part of ZATCA requirements for implementation of
     e-invoice (fatoora).
     """
     tags = TLV()
