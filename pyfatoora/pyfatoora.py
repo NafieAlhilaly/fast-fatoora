@@ -89,7 +89,7 @@ class PyFatoora:
             seller_info[str(tag)] = tag_value
         return seller_info
 
-    def read_qrcode_image(self, image_url:str, dictionary=True) -> str or dict:
+    def read_qrcode_image(self, image_url:str) -> str or dict:
         """
         extract seller information from qr-code image.
 
