@@ -18,6 +18,8 @@ from uttlv import TLV
 import base64
 import qrcode
 import cv2
+from PIL import Image
+from pyzbar.pyzbar import decode
 
 
 class PyFatoora:
@@ -87,4 +89,18 @@ class PyFatoora:
             seller_info[str(tag)] = tag_value
         return seller_info
 
+    def read_qrcode_image(self, image_url:str, dictionary=True) -> str or dict:
+        """
+        extract seller information from qr-code image.
 
+        :param image_url: 
+            a qr-code image path or url
+        
+        :return: 
+            base64 code, or 
+            dictionary contains seller information
+        """
+        data = decode(Image.open(image_url))
+        extracted_info = self.base64_to_tlv(data[0][0])
+
+        return extracted_info
