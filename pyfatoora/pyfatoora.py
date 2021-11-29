@@ -96,8 +96,7 @@ class PyFatoora:
         :param image_url: 
             a qr-code image path or url
         
-        :return: 
-            base64 code, or 
+        :return:
             dictionary contains seller information
         """
         data = decode(Image.open(image_url))
