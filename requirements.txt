@@ -1,5 +1,5 @@
 uttlv==0.6.0
-opencv-python-headless
+opencv-python-headless==4.5.4.58
 requests==2.25.1
 fastapi==0.70.0
 uvicorn==0.15.0
