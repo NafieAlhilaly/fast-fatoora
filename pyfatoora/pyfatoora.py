@@ -30,11 +30,12 @@ class PyFatoora:
     """
     tags = TLV()
 
-    def __init__(self, seller_name: str,
-                 tax_number: str,
-                 invoice_date: str,
-                 total_amount: str,
-                 tax_amount: str):
+    def __init__(self, 
+                 seller_name: str = "",
+                 tax_number: str = "",
+                 invoice_date: str = "",
+                 total_amount: str = "",
+                 tax_amount: str = ""):
         self.seller_name = seller_name
         self.tax_number = tax_number
         self.invoice_date = invoice_date
