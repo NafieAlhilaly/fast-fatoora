@@ -1,7 +1,9 @@
 import os
+from io import BytesIO
+import pathlib
 from .pyfatoora import PyFatoora
 from .info import InvoiceData
-from fastapi import FastAPI, Request, Form
+from fastapi import FastAPI, Request, Form, File, UploadFile, HTTPException
 from fastapi.responses import FileResponse
 from starlette.background import BackgroundTasks
 from starlette.responses import RedirectResponse
@@ -71,3 +73,13 @@ def handle_form(background_tasks: BackgroundTasks,
     # after it return to the user
     background_tasks.add_task(os.remove, "qr_code_img.png")
     return FileResponse("qr_code_img.png", background=background_tasks)
+
+
+@app.post("/read_qrcode_image", status_code=202)
+async def read_image(image: UploadFile = File(...)):
+    if pathlib.Path(image.filename).suffix != ".png":
+        raise HTTPException(status_code=415)
+    
+    pyfat = PyFatoora("","","","","")
+    return pyfat.read_qrcode_image(BytesIO(image.file.read()))
+    
