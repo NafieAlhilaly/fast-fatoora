@@ -52,7 +52,7 @@ def handle_form(background_tasks: BackgroundTasks,
                     tax_amount: str = Form(...),
                     render_type: str = Form(...)
                 ):
-    date = str(invoice_date) + str(invoice_time)
+    # date = str(invoice_date) + str(invoice_time)
     
     fatoora = PyFatoora(seller_name,
         tax_number,
@@ -74,7 +74,7 @@ def handle_form(background_tasks: BackgroundTasks,
 
 
 @app.post("/read_qrcode_image", status_code=202)
-async def read_image(image: UploadFile = File(...)):
+async def read_qrcode_image(image: UploadFile = File(...)):
     if pathlib.Path(image.filename).suffix != ".png":
         raise HTTPException(status_code=415)
     
