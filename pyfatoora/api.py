@@ -6,8 +6,6 @@ from .info import InvoiceData
 from fastapi import FastAPI, Request, Form, File, UploadFile, HTTPException
 from fastapi.responses import FileResponse
 from starlette.background import BackgroundTasks
-from starlette.responses import RedirectResponse
-from fastapi.middleware.cors import CORSMiddleware
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 
@@ -80,6 +78,6 @@ async def read_image(image: UploadFile = File(...)):
     if pathlib.Path(image.filename).suffix != ".png":
         raise HTTPException(status_code=415)
     
-    pyfat = PyFatoora("","","","","")
+    pyfat = PyFatoora()
     return pyfat.read_qrcode_image(BytesIO(image.file.read()))
     
