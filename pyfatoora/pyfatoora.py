@@ -14,6 +14,7 @@ The minimum seller inforamion required are :
 - Tax amount.
 
 """
+from typing import Optional
 from uttlv import TLV
 import base64
 import qrcode
@@ -29,18 +30,51 @@ class PyFatoora:
     e-invoice (fatoora).
     """
     tags = TLV()
+    seller_name: Optional[str] = None
+    tax_number: Optional[str] = None
+    invoice_date: Optional[str] = None
+    total_amount: Optional[str] = None
+    tax_amount: Optional[str] = None
 
     def __init__(self, 
-                 seller_name: str = "",
-                 tax_number: str = "",
-                 invoice_date: str = "",
-                 total_amount: str = "",
-                 tax_amount: str = ""):
+                 seller_name: Optional[str] = None,
+                 tax_number: Optional[str] = None,
+                 invoice_date: Optional[str] = None,
+                 total_amount: Optional[str] = None,
+                 tax_amount: Optional[str] = None):
+        self.set_info(
+            seller_name=seller_name,
+            tax_number=tax_number,
+            invoice_date=invoice_date,
+            total_amount=total_amount,
+            tax_amount=tax_amount
+        )
+
+    def set_info(
+        self,
+        seller_name: Optional[str] = seller_name,
+        tax_number: Optional[str] = tax_number,
+        invoice_date: Optional[str] = invoice_date,
+        total_amount: Optional[str] = total_amount,
+        tax_amount: Optional[str] = total_amount) -> None:
+
         self.seller_name = seller_name
         self.tax_number = tax_number
         self.invoice_date = invoice_date
         self.total_amount = total_amount
         self.tax_amount = tax_amount
+        
+
+    def get_info(self) -> dict:
+        
+        info: dict = {
+            "seller_name": self.seller_name,
+            "tax_number": self.tax_number,
+            "invoice_date": self.invoice_date,
+            "total_amount": self.total_amount,
+            "tax_amount": self.tax_amount
+        }
+        return info
 
     def tlv_to_base64(self) -> dict:
         """
