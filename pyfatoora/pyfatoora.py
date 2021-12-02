@@ -30,11 +30,6 @@ class PyFatoora:
     e-invoice (fatoora).
     """
     tags = TLV()
-    seller_name: Optional[str] = None
-    tax_number: Optional[str] = None
-    invoice_date: Optional[str] = None
-    total_amount: Optional[str] = None
-    tax_amount: Optional[str] = None
 
     def __init__(self, 
                  seller_name: Optional[str] = None,
@@ -42,28 +37,27 @@ class PyFatoora:
                  invoice_date: Optional[str] = None,
                  total_amount: Optional[str] = None,
                  tax_amount: Optional[str] = None):
-        self.set_info(
-            seller_name=seller_name,
-            tax_number=tax_number,
-            invoice_date=invoice_date,
-            total_amount=total_amount,
-            tax_amount=tax_amount
-        )
-
-    def set_info(
-        self,
-        seller_name: Optional[str] = seller_name,
-        tax_number: Optional[str] = tax_number,
-        invoice_date: Optional[str] = invoice_date,
-        total_amount: Optional[str] = total_amount,
-        tax_amount: Optional[str] = total_amount) -> None:
-
         self.seller_name = seller_name
         self.tax_number = tax_number
         self.invoice_date = invoice_date
         self.total_amount = total_amount
         self.tax_amount = tax_amount
-        
+
+
+    def set_info(
+        self,
+        seller_name: Optional[str] = None,
+        tax_number: Optional[str] = None,
+        invoice_date: Optional[str] = None,
+        total_amount: Optional[str] = None,
+        tax_amount: Optional[str] = None) -> None:
+
+        self.seller_name = seller_name if seller_name is not None else self.seller_name
+        self.tax_number = tax_number if tax_number is not None else self.tax_amount
+        self.invoice_date = invoice_date if invoice_date is not None else self.invoice_date
+        self.total_amount = total_amount if total_amount is not None else self.total_amount
+        self.tax_amount = tax_amount if tax_amount is not None else self.total_amount
+         
 
     def get_info(self) -> dict:
         
