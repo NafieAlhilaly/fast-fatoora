@@ -7,3 +7,4 @@ qrcode==7.3.1
 Pillow==8.4.0
 Jinja2==3.0.2
 python-multipart==0.0.5
+pyzbar==0.1.8
