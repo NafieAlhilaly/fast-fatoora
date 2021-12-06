@@ -8,7 +8,6 @@ You can try it with simple ui @ [api-fatoora](https://api-fatoora.herokuapp.com/
 
 
 api-fatoora is an open API to help generating QR-code for [ZATCA's e-invoice known as "Fatoorah"](https://zatca.gov.sa/en/E-Invoicing/Introduction/Pages/What-is-e-invoicing.aspx) with any programming language
-> _Disclaimer: this API is not **secure** yet, please dont post sensitive information._
 
 ---------
 ## how to use it 
