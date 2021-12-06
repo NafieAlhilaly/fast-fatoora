@@ -5,7 +5,7 @@ import datetime
 import random
 from typing import Optional
 from .pyfatoora import PyFatoora
-from .info import InvoiceData
+from .schemas import InvoiceData
 from fastapi import FastAPI, Request, Form, File, UploadFile, HTTPException
 from fastapi.responses import FileResponse
 from starlette.background import BackgroundTasks
