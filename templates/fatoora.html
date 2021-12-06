@@ -46,10 +46,11 @@
                   </table>
             </div>
             <h6 class="text-center">(15%)شامل ضريبة القيمة المضافة</h6>
-            <h6>{{ data.tax_amount}}</h6>
+            <h6 >{{ data.tax_amount}} </h6>
             <br><hr>
             <div class="d-flex justify-content-center">
-                <img width="150" src="./{{data.image_url}}">
+                <img width="150" src="
+                http://127.0.0.1:8000/to_qrcode_image?name={{data.seller_name}}&tax_number={{data.tax_number}}&date={{data.date}}&total={{data.total}}&tax={{data.tax_amount}}">
             </div>
         </main>
     </body>
