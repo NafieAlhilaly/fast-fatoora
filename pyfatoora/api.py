@@ -134,14 +134,6 @@ async def full_fat(
     date: Optional[str] = str(datetime.datetime.now()),
     fat_number: Optional[str] = random.randint(1000, 9999)):
 
-    fatoora = PyFatoora(
-        seller_name,
-        tax_number,
-        date,
-        total,
-        tax_amount
-    )
-
     data = {
         "fat_number":fat_number,
         "seller_name":seller_name,
