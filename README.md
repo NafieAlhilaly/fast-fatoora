@@ -32,8 +32,15 @@ lets assume you have the following data
 ### To base64
 Use /to_base64 to get base64 encoded information
 ```
-
-https://api-fatoora.herokuapp.com/to_base64?name=Nafie&tax_number=981293479834&date=2021-12-06%2016%3A14%3A17.374909&total=100.00&tax=0.50
+Parameter :
+  seller_name: required
+  tax_number: required
+  date: optional, if not provided created date and time will be added
+  total: reuired
+  tax_amount: required
+  
+  
+https://api-fatoora.herokuapp.com/to_base64?seller_name=Nafie&tax_number=981293479834&total=100.00&tax_amount=0.50&date=2021-12-06%2016%3A14%3A17.374909
 ```
 [Try it](https://api-fatoora.herokuapp.com/to_base64?name=Nafie&tax_number=981293479834&date=2021-12-06%2016%3A14%3A17.374909&total=100.00&tax=0.50
 )
@@ -41,8 +48,16 @@ https://api-fatoora.herokuapp.com/to_base64?name=Nafie&tax_number=981293479834&d
 ### To QR-Code image
 Use /to_qrcode_image to generate QR-COde image
 ```
+Parameter :
+  seller_name: required
+  tax_number: required
+  date: optional, if not provided created date and time will be added
+  total: reuired
+  tax_amount: required
+  
+  
 
-https://api-fatoora.herokuapp.com/to_qrcode_image?name=Nafie&tax_number=981293479834&date=2021-12-06%2016%3A14%3A17.374909&total=100.00&tax=0.50
+https://api-fatoora.herokuapp.com/to_qrcode_image?seller_name=Nafi&tax_number=981293479834&total=100.00&tax_amount=0.50&date=2021-12-06%2016%3A14%3A17.374909
 ```
 [Try it](https://api-fatoora.herokuapp.com/to_qrcode_image?name=Nafie&tax_number=981293479834&date=2021-12-06%2016%3A14%3A17.374909&total=100.00&tax=0.50
 )
