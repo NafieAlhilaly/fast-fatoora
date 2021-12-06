@@ -9,7 +9,7 @@ from .pyfatoora import PyFatoora
 from .info import InvoiceData
 from fastapi import FastAPI, Request, Form, File, UploadFile, HTTPException
 from fastapi.responses import FileResponse
-from starlette.background import BackgroundTask, BackgroundTasks
+from starlette.background import BackgroundTasks
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 
