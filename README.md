@@ -9,6 +9,10 @@ You can try it with simple ui @ [api-fatoora](https://api-fatoora.herokuapp.com/
 
 api-fatoora is an open API to help generating QR-code for [ZATCA's e-invoice known as "Fatoorah"](https://zatca.gov.sa/en/E-Invoicing/Introduction/Pages/What-is-e-invoicing.aspx) with any programming language
 
+
+full API [documentations](https://api-fatoora.herokuapp.com/docs) 
+
+
 ---------
 ## how to use it 
 The simplest way to get started is to send POST request with json of your data, here an example using python requests
