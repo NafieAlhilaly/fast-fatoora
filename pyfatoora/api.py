@@ -1,11 +1,15 @@
 import os
 from io import BytesIO
 import pathlib
+import datetime
+import random
+from typing import Optional
+from starlette.responses import Response
 from .pyfatoora import PyFatoora
 from .info import InvoiceData
 from fastapi import FastAPI, Request, Form, File, UploadFile, HTTPException
 from fastapi.responses import FileResponse
-from starlette.background import BackgroundTasks
+from starlette.background import BackgroundTask, BackgroundTasks
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse
 
@@ -119,4 +123,37 @@ async def read_qrcode_image(image: UploadFile = File(...)):
     
     pyfat = PyFatoora()
     return pyfat.read_qrcode_image(BytesIO(image.file.read()))
-    
+
+@app.get("/full_fatoora")
+async def full_fat(
+    request: Request,
+    seller_name: str,
+    tax_number: str,
+    total: str,
+    tax_amount: str,
+    background_tasks: BackgroundTasks,
+    date: Optional[str] = str(datetime.datetime.now()),
+    fat_number: Optional[str] = random.randint(1000, 9999)):
+
+    fatoora = PyFatoora(
+        seller_name,
+        tax_number,
+        date,
+        total,
+        tax_amount
+    )
+
+    qrcode_image = fatoora.render_qrcode_image()
+    qrcode_image.save(f"qr_code_img-{fat_number}.png")
+    data = {
+        "fat_number":fat_number,
+        "seller_name":seller_name,
+        "tax_number": tax_number,
+        "date": date,
+        "total": total,
+        "tax_amount": tax_amount,
+        "image_url": f"qr_code_img-{fat_number}.png"
+    }
+
+    background_tasks.add_task(os.remove, f"./qr_code_img-{fat_number}.png")
+    return templates.TemplateResponse("fatoora.html", {"request":request, "data":data})
