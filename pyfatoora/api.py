@@ -17,8 +17,24 @@ templates = Jinja2Templates(directory="templates")
 async def home(request: Request):
     return templates.TemplateResponse("index.html", {"request":request})
 
-@app.post("/to_base64")
-async def base64_endpoint(invoice_data : InvoiceData):
+@app.get("/to_base64", tags=['tvl to base64'])
+async def get_base64_endpoint(
+    name: str, 
+    tax_number: str,
+    date: str,
+    total: str,
+    tax: str):
+    fatoora = PyFatoora(name,
+        tax_number,
+        date,
+        total,
+        tax)
+
+    tlv_as_base64 = fatoora.tlv_to_base64()
+    return {"TLV_to_base64": tlv_as_base64}
+
+@app.post("/to_base64", tags=['tvl to base64'])
+async def post_base64_endpoint(invoice_data : InvoiceData):
     fatoora = PyFatoora(invoice_data.seller_name,
         invoice_data.tax_number,
         invoice_data.invoice_date,
@@ -28,7 +44,29 @@ async def base64_endpoint(invoice_data : InvoiceData):
     tlv_as_base64 = fatoora.tlv_to_base64()
     return {"TLV_to_base64": tlv_as_base64}
 
-@app.post("/to_qrcode_image", response_class=FileResponse)
+@app.get("/to_qrcode_image", response_class=FileResponse, tags=['QR-code'])
+async def qrcode_image_endpoint(
+    name: str, 
+    tax_number: str,
+    date: str,
+    total: str,
+    tax: str, 
+    background_tasks: BackgroundTasks):
+
+    fatoora = PyFatoora(name,
+        tax_number,
+        date,
+        total,
+        tax)
+    
+    qrcode_image = fatoora.render_qrcode_image()
+    qrcode_image.save("qr_code_img.png")
+
+    background_tasks.add_task(os.remove, "qr_code_img.png")
+    return FileResponse("qr_code_img.png", background=background_tasks)
+
+
+@app.post("/to_qrcode_image", response_class=FileResponse, tags=['QR-code'])
 async def qrcode_image_endpoint(invoice_data: InvoiceData, background_tasks: BackgroundTasks):
     fatoora = PyFatoora(invoice_data.seller_name,
         invoice_data.tax_number,
@@ -37,6 +75,7 @@ async def qrcode_image_endpoint(invoice_data: InvoiceData, background_tasks: Bac
         invoice_data.tax_amount)
     
     qrcode_image = fatoora.render_qrcode_image()
+    print(type(qrcode_image))
     qrcode_image.save("qr_code_img.png")
 
     background_tasks.add_task(os.remove, "qr_code_img.png")
@@ -73,7 +112,7 @@ def handle_form(background_tasks: BackgroundTasks,
     return FileResponse("qr_code_img.png", background=background_tasks)
 
 
-@app.post("/read_qrcode_image", status_code=202)
+@app.post("/read_qrcode_image", status_code=202, tags=['read QR-code image'])
 async def read_qrcode_image(image: UploadFile = File(...)):
     if pathlib.Path(image.filename).suffix != ".png":
         raise HTTPException(status_code=415)
