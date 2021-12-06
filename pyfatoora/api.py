@@ -143,17 +143,13 @@ async def full_fat(
         tax_amount
     )
 
-    qrcode_image = fatoora.render_qrcode_image()
-    qrcode_image.save(f"qr_code_img-{fat_number}.png")
     data = {
         "fat_number":fat_number,
         "seller_name":seller_name,
         "tax_number": tax_number,
         "date": date,
         "total": total,
-        "tax_amount": tax_amount,
-        "image_url": f"qr_code_img-{fat_number}.png"
+        "tax_amount": tax_amount
     }
 
-    background_tasks.add_task(os.remove, f"./qr_code_img-{fat_number}.png")
     return templates.TemplateResponse("fatoora.html", {"request":request, "data":data})
