@@ -10,57 +10,39 @@ You can try it with simple ui @ [api-fatoora](https://api-fatoora.herokuapp.com/
 api-fatoora is an open API to help generating QR-code for [ZATCA's e-invoice known as "Fatoorah"](https://zatca.gov.sa/en/E-Invoicing/Introduction/Pages/What-is-e-invoicing.aspx) with any programming language
 
 
+
+
 full API [documentations](https://api-fatoora.herokuapp.com/docs) 
 
 
 ---------
 ## how to use it 
-The simplest way to get started is to send POST request with json of your data, here an example using python requests
 
-#### Convert data to base 64
-`POST /to_base64/`
-```python
-import requests
-import json
-
-data = {
-    "seller_name": "nafie",
-    "tax_number": "876554674",
-    "invoice_date": "875t6554",
-    "total_amount": "200",
-    "tax_amount": "30"   
+lets assume you have the following data 
+```json
+{
+  "seller_name":"Nafie",
+  "tax_number":"981293479834",
+  "date":"2021-12-06 16:14:17.374909",
+  "total_amount":"100.00",
+  "tax_amount":"0.50"
 }
-
-data = json.dumps(data)
-
-response = requests.post('https://api-fatoora.herokuapp.com/to_base64', data=data)
-print(response.json())
-# result : {'TLV_to_base64': 'AQVuYWZpZQIJODc2NTU0Njc0Awg4NzV0NjU1NAQDMjAwBQIzMA=='}
 ```
 
-#### Convert data to QR-Code
-`POST /to_qrcode_image/`
-```python
-from PIL import Image
-import io
-import requests
-import json
-
-data = {
-    "seller_name": "nafie",
-    "tax_number": "876554674",
-    "invoice_date": "875t6554",
-    "total_amount": "200",
-    "tax_amount": "30"   
-}
-
-data = json.dumps(data)
-response = requests.post('http://127.0.0.1:8000/to_qrcode_image', data=data)
-
-# get image response as bytes
-image_data = response.content
-
-# convert bytes to image using PIL.Image
-image = Image.open(io.BytesIO(image_data))
-image.show()
+### To base64
+Use /to_base64 to get base64 encoded information
 ```
+
+https://api-fatoora.herokuapp.com/to_base64?name=Nafie&tax_number=981293479834&date=2021-12-06%2016%3A14%3A17.374909&total=100.00&tax=0.50
+```
+[Try it](https://api-fatoora.herokuapp.com/to_base64?name=Nafie&tax_number=981293479834&date=2021-12-06%2016%3A14%3A17.374909&total=100.00&tax=0.50
+)
+
+### To QR-Code image
+Use /to_qrcode_image to generate QR-COde image
+```
+
+https://api-fatoora.herokuapp.com/to_qrcode_image?name=Nafie&tax_number=981293479834&date=2021-12-06%2016%3A14%3A17.374909&total=100.00&tax=0.50
+```
+[Try it](https://api-fatoora.herokuapp.com/to_qrcode_image?name=Nafie&tax_number=981293479834&date=2021-12-06%2016%3A14%3A17.374909&total=100.00&tax=0.50
+)
