@@ -4,7 +4,6 @@ import pathlib
 import datetime
 import random
 from typing import Optional
-from starlette.responses import Response
 from .pyfatoora import PyFatoora
 from .info import InvoiceData
 from fastapi import FastAPI, Request, Form, File, UploadFile, HTTPException
@@ -23,16 +22,16 @@ async def home(request: Request):
 
 @app.get("/to_base64", tags=['tvl to base64'])
 async def get_base64_endpoint(
-    name: str, 
+    seller_name: str, 
     tax_number: str,
-    date: str,
     total: str,
-    tax: str):
-    fatoora = PyFatoora(name,
+    tax_amount: str,
+    date: Optional[str] = str(datetime.datetime.now())):
+    fatoora = PyFatoora(seller_name,
         tax_number,
         date,
         total,
-        tax)
+        tax_amount)
 
     tlv_as_base64 = fatoora.tlv_to_base64()
     return {"TLV_to_base64": tlv_as_base64}
@@ -50,18 +49,19 @@ async def post_base64_endpoint(invoice_data : InvoiceData):
 
 @app.get("/to_qrcode_image", response_class=FileResponse, tags=['QR-code'])
 async def qrcode_image_endpoint(
-    name: str, 
+    seller_name: str, 
     tax_number: str,
-    date: str,
     total: str,
-    tax: str, 
-    background_tasks: BackgroundTasks):
+    tax_amount: str, 
+    background_tasks: BackgroundTasks,
+    date: Optional[str] = str(datetime.datetime.now())
+    ):
 
-    fatoora = PyFatoora(name,
+    fatoora = PyFatoora(seller_name,
         tax_number,
         date,
         total,
-        tax)
+        tax_amount)
     
     qrcode_image = fatoora.render_qrcode_image()
     qrcode_image.save("qr_code_img.png")
@@ -131,7 +131,6 @@ async def full_fat(
     tax_number: str,
     total: str,
     tax_amount: str,
-    background_tasks: BackgroundTasks,
     date: Optional[str] = str(datetime.datetime.now()),
     fat_number: Optional[str] = random.randint(1000, 9999)):
 
