@@ -1,7 +1,7 @@
 # api-fatoora
 
 <p align="center">
-  <img align="center" src="https://github.com/NafieAlhilaly/api-fatoora/blob/main/images/secret-qr-code.png" width=300/>
+  <img align="center" src="https://github.com/NafieAlhilaly/api-fatoora/blob/main/images/full_E-invoice.jpg" width=300/>
 </p>
 
 You can try it with simple ui @ [api-fatoora](https://api-fatoora.herokuapp.com/)
