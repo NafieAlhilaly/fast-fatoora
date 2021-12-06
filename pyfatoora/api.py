@@ -25,8 +25,11 @@ async def get_base64_endpoint(
     seller_name: str, 
     tax_number: str,
     total: str,
-    tax_amount: str,
+    tax_amount: Optional[str] = None,
     date: Optional[str] = str(datetime.datetime.now())):
+
+    tax_amount = tax_amount if tax_amount is not None else str(float(total)*0.15)
+
     fatoora = PyFatoora(seller_name,
         tax_number,
         date,
@@ -52,10 +55,12 @@ async def qrcode_image_endpoint(
     seller_name: str, 
     tax_number: str,
     total: str,
-    tax_amount: str, 
     background_tasks: BackgroundTasks,
+    tax_amount: Optional[str] = None,
     date: Optional[str] = str(datetime.datetime.now())
     ):
+
+    tax_amount = tax_amount if tax_amount is not None else str(float(total)*0.15)
 
     fatoora = PyFatoora(seller_name,
         tax_number,
@@ -130,10 +135,12 @@ async def full_fat(
     seller_name: str,
     tax_number: str,
     total: str,
-    tax_amount: str,
+    tax_amount: Optional[str] = None,
     date: Optional[str] = str(datetime.datetime.now()),
     fat_number: Optional[str] = random.randint(1000, 9999)):
 
+    tax_amount = tax_amount if tax_amount is not None else str(float(total)*0.15)
+    
     data = {
         "fat_number":fat_number,
         "seller_name":seller_name,
