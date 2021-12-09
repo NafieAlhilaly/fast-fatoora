@@ -18,7 +18,6 @@ from typing import Optional
 from uttlv import TLV
 import base64
 import qrcode
-import cv2
 from PIL import Image
 from pyzbar.pyzbar import decode
 
