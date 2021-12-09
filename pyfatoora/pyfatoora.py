@@ -30,12 +30,12 @@ class PyFatoora:
     """
     tags = TLV()
 
-    def __init__(self, 
+    def __init__(self,
                  seller_name: Optional[str] = None,
-                 tax_number: Optional[str] = None,
+                 tax_number: Optional[int] = None,
                  invoice_date: Optional[str] = None,
-                 total_amount: Optional[str] = None,
-                 tax_amount: Optional[str] = None):
+                 total_amount: Optional[float] = None,
+                 tax_amount: Optional[float] = None):
         self.seller_name = seller_name
         self.tax_number = tax_number
         self.invoice_date = invoice_date
@@ -46,10 +46,10 @@ class PyFatoora:
     def set_info(
         self,
         seller_name: Optional[str] = None,
-        tax_number: Optional[str] = None,
+        tax_number: Optional[int] = None,
         invoice_date: Optional[str] = None,
-        total_amount: Optional[str] = None,
-        tax_amount: Optional[str] = None) -> None:
+        total_amount: Optional[float] = None,
+        tax_amount: Optional[float] = None) -> None:
 
         self.seller_name = seller_name if seller_name is not None else self.seller_name
         self.tax_number = tax_number if tax_number is not None else self.tax_amount
@@ -75,10 +75,10 @@ class PyFatoora:
         :return: dict: tlv list and base 64 encoded tlv list
         """
         self.tags[0x01] = self.seller_name
-        self.tags[0x02] = self.tax_number
-        self.tags[0x03] = self.invoice_date
-        self.tags[0x04] = self.total_amount
-        self.tags[0x05] = self.tax_amount
+        self.tags[0x02] = str(self.tax_number)
+        self.tags[0x03] = str(self.invoice_date)
+        self.tags[0x04] = str(self.total_amount)
+        self.tags[0x05] = str(self.tax_amount)
 
         tlv_as_byte_array = self.tags.to_byte_array()
 
@@ -117,7 +117,7 @@ class PyFatoora:
             seller_info[str(tag)] = tag_value
         return seller_info
 
-    def read_qrcode_image(self, image_url:str) -> str or dict:
+    def read_qrcode_image(self, image_url:str) -> dict:
         """
         extract seller information from qr-code image.
 
