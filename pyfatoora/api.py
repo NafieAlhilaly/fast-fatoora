@@ -20,7 +20,7 @@ templates = Jinja2Templates(directory="templates")
 async def home(request: Request):
     return templates.TemplateResponse("index.html", {"request":request})
 
-@app.get("/to_base64", tags=['tvl to base64'])
+@app.get("/to_base64", tags=['To base64'])
 async def get_base64_endpoint(
     seller_name: str, 
     tax_number: str,
@@ -37,18 +37,18 @@ async def get_base64_endpoint(
         tax_amount)
 
     tlv_as_base64 = fatoora.tlv_to_base64()
-    return {"TLV_to_base64": tlv_as_base64}
+    return {"to_base64": tlv_as_base64}
 
-@app.post("/to_base64", tags=['tvl to base64'])
+@app.post("/to_base64", tags=['To base64'])
 async def post_base64_endpoint(invoice_data : InvoiceData):
     fatoora = PyFatoora(invoice_data.seller_name,
         invoice_data.tax_number,
-        invoice_data.invoice_date,
-        invoice_data.total_amount,
+        invoice_data.date,
+        invoice_data.total,
         invoice_data.tax_amount)
 
     tlv_as_base64 = fatoora.tlv_to_base64()
-    return {"TLV_to_base64": tlv_as_base64}
+    return {"to_base64": tlv_as_base64}
 
 @app.get("/to_qrcode_image", response_class=FileResponse, tags=['QR-code'])
 async def qrcode_image_endpoint(
@@ -77,11 +77,14 @@ async def qrcode_image_endpoint(
 
 @app.post("/to_qrcode_image", response_class=FileResponse, tags=['QR-code'])
 async def qrcode_image_endpoint(invoice_data: InvoiceData, background_tasks: BackgroundTasks):
-    fatoora = PyFatoora(invoice_data.seller_name,
+
+    fatoora = PyFatoora(
+        invoice_data.seller_name,
         invoice_data.tax_number,
-        invoice_data.invoice_date,
-        invoice_data.total_amount,
-        invoice_data.tax_amount)
+        invoice_data.date,
+        invoice_data.total,
+        invoice_data.tax_amount
+    )
     
     qrcode_image = fatoora.render_qrcode_image()
     print(type(qrcode_image))
@@ -92,26 +95,40 @@ async def qrcode_image_endpoint(invoice_data: InvoiceData, background_tasks: Bac
 
 @app.post("/submitform")
 def handle_form(background_tasks: BackgroundTasks,
+                    request: Request,
                     seller_name: str = Form(...), 
                     tax_number: str = Form(...), 
-                    invoice_date: str = Form(...),
-                    invoice_time: str = Form(...), 
-                    total_amount: str = Form(...), 
-                    tax_amount: str = Form(...),
+                    date: str = Form(None),
+                    time: str = Form(None), 
+                    total: str = Form(...), 
+                    tax_amount: str = Form(None),
                     render_type: str = Form(...)
                 ):
     # date = str(invoice_date) + str(invoice_time)
     
     fatoora = PyFatoora(seller_name,
         tax_number,
-        invoice_date,
-        total_amount,
+        date,
+        total,
         tax_amount)
     
     if render_type == "1":
         tlv_as_base64 = fatoora.tlv_to_base64()
         return {"TLV_to_base64": tlv_as_base64}
-    
+
+    if render_type == "3":
+        tax_amount = tax_amount if tax_amount is not None else str(float(total)*0.15)
+
+        data = {
+            "fat_number":random.randint(100, 999),
+            "seller_name":seller_name,
+            "tax_number": tax_number,
+            "date": date,
+            "total": total,
+            "tax_amount": tax_amount
+        }
+        return templates.TemplateResponse("fatoora.html", {"request":request, "data":data})
+        
     qrcode_image = fatoora.render_qrcode_image()
     qrcode_image.save("qr_code_img.png")
 
@@ -129,7 +146,7 @@ async def read_qrcode_image(image: UploadFile = File(...)):
     pyfat = PyFatoora()
     return pyfat.read_qrcode_image(BytesIO(image.file.read()))
 
-@app.get("/full_fatoora")
+@app.get("/full_fatoora", tags=['Full Fatoora'])
 async def full_fat(
     request: Request,
     seller_name: str,
@@ -138,6 +155,29 @@ async def full_fat(
     tax_amount: Optional[str] = None,
     date: Optional[str] = str(datetime.datetime.now()),
     fat_number: Optional[str] = random.randint(1000, 9999)):
+
+    tax_amount = tax_amount if tax_amount is not None else str(float(total)*0.15)
+    
+    data = {
+        "fat_number":fat_number,
+        "seller_name":seller_name,
+        "tax_number": tax_number,
+        "date": date,
+        "total": total,
+        "tax_amount": tax_amount
+    }
+
+    return templates.TemplateResponse("fatoora.html", {"request":request, "data":data})
+
+@app.post("/full_fatoora", tags=['Full Fatoora'])
+async def full_fat(
+    request: Request,
+    seller_name: str = Form(...),
+    tax_number: int = Form(...),
+    total: float = Form(...),
+    tax_amount: float = Form(None),
+    date: str = Form(str(datetime.datetime.now())),
+    fat_number: int = Form(random.randint(1000, 9999))):
 
     tax_amount = tax_amount if tax_amount is not None else str(float(total)*0.15)
     
