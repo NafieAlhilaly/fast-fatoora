@@ -22,14 +22,19 @@
                 <div class="form-group p-5 ">
                     <input class="form-control m-2" type="text" name="seller_name" placeholder="Seller name" required>
                     <input class="form-control m-2" type="text" name="tax_number" placeholder="Tax number" required>
-                    <input class="form-control m-2" type="date" name="invoice_date" placeholder="Invoice date" required>
-                    <input class="form-control m-2" type="time" name="invoice_time" placeholder="Invoice Time" required>
-                    <input class="form-control m-2" type="text" name="total_amount" placeholder="Total Amount" required>
-                    <input class="form-control m-2" type="text" name="tax_amount" placeholder="Tax Amount" required>
+                    <input class="form-control m-2" type="date" name="date" placeholder="Invoice date" >
+                    <input class="form-control m-2" type="time" name="time" placeholder="Invoice Time" >
+                    <input class="form-control m-2" type="text" name="total" placeholder="Total Amount" required>
+                    <input class="form-control m-2" type="text" name="tax_amount" placeholder="Tax Amount">
+
                     <input class="form-check-input" type="radio" name="render_type" value="1" required>
                     <label class="form-check-label" for="base64">Base 64 decode</label>
                     <input class="form-check-input" type="radio" name="render_type" value="2" required>
                     <label class="form-check-label" for="qrcode">QR-Code</label>
+                    <input class="form-check-input" type="radio" name="render_type" value="3" required>
+                    <label class="form-check-label" for="full_fat">Full Fatoora</label>
+                    
+
                     <div class="d-flex justify-content-center mt-1">
                         <input class="btn btn-primary d-flex align-self-center" type="submit"/>
                     </div>
