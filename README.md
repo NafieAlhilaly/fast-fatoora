@@ -18,7 +18,7 @@ full API [documentations](https://api-fatoora.herokuapp.com/docs)
 ---------
 ## how to use it 
 
-lets assume you have the following data 
+lets say you have the following data 
 ```json
 {
   "seller_name":"Nafie",
