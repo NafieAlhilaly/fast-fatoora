@@ -14,12 +14,14 @@ The minimum seller inforamion required are :
 - Tax amount.
 
 """
-from typing import Optional
+from typing import Optional, Union
 from uttlv import TLV
 import base64
 import qrcode
 from PIL import Image
+import datetime
 from pyzbar.pyzbar import decode
+from pydantic import validate_arguments
 
 
 class PyFatoora:
@@ -34,38 +36,68 @@ class PyFatoora:
                  seller_name: Optional[str] = None,
                  tax_number: Optional[int] = None,
                  invoice_date: Optional[str] = None,
-                 total_amount: Optional[float] = None,
-                 tax_amount: Optional[float] = None):
-        self.seller_name = seller_name
-        self.tax_number = tax_number
-        self.invoice_date = invoice_date
-        self.total_amount = total_amount
-        self.tax_amount = tax_amount
+                 total_amount: Optional[float] = 0.00,
+                 tax_amount: Optional[float] = 0.00):
+        self._seller_name = seller_name
+        self._tax_number = tax_number
+        self._date = invoice_date
+        self._total = total_amount
+        self._tax_amount = tax_amount
 
+    @property
+    def seller_name(self)  -> str:
+        return self._seller_name
 
-    def set_info(
-        self,
-        seller_name: Optional[str] = None,
-        tax_number: Optional[int] = None,
-        invoice_date: Optional[str] = None,
-        total_amount: Optional[float] = None,
-        tax_amount: Optional[float] = None) -> None:
+    @seller_name.setter
+    @validate_arguments
+    def seller_name(self, seller_name: str) -> None:
+        self._seller_name = seller_name
 
-        self.seller_name = seller_name if seller_name is not None else self.seller_name
-        self.tax_number = tax_number if tax_number is not None else self.tax_amount
-        self.invoice_date = invoice_date if invoice_date is not None else self.invoice_date
-        self.total_amount = total_amount if total_amount is not None else self.total_amount
-        self.tax_amount = tax_amount if tax_amount is not None else self.total_amount
-         
+    @property
+    def tax_number(self) -> int:
+        return self._tax_number
 
+    @tax_number.setter
+    @validate_arguments
+    def tax_nmuber(self, tax_nmuber: int) -> None:
+        self._tax_nmuber = tax_nmuber
+    
+    @property
+    def date(self) -> str:
+        return self._date
+
+    @date.setter
+    @validate_arguments
+    def date(self, date: Optional[Union[str, datetime.datetime]]) -> None:
+        self._date = str(date)
+
+    @property
+    def total(self) -> float:
+        return self._total
+
+    @total.setter
+    @validate_arguments
+    def total(self, total: float) -> None:
+        self._total = total
+
+    @property
+    def tax_amount(self) -> float:
+        return self._tax_amount
+
+    @tax_amount.setter
+    @validate_arguments
+    def tax_amount(self, tax_amount: float) -> None:
+        self._tax_amount = tax_amount
+
+    
     def get_info(self) -> dict:
         
         info: dict = {
-            "seller_name": self.seller_name,
-            "tax_number": self.tax_number,
-            "invoice_date": self.invoice_date,
-            "total_amount": self.total_amount,
-            "tax_amount": self.tax_amount
+            "seller_name": self._seller_name,
+            "tax_number": self._tax_number,
+            "invoice_date": self._date,
+            "total_amount": self._total,
+            "tax_amount": self._tax_amount
         }
         return info
 
@@ -74,12 +106,12 @@ class PyFatoora:
         convert object tags to byte array then apply base 64 encode on tlv list
         :return: dict: tlv list and base 64 encoded tlv list
         """
-        self.tags[0x01] = self.seller_name
-        self.tags[0x02] = str(self.tax_number)
-        self.tags[0x03] = str(self.invoice_date)
-        self.tags[0x04] = str(self.total_amount)
-        self.tags[0x05] = str(self.tax_amount)
-
+        self.tags[0x01] = self._seller_name
+        self.tags[0x02] = str(self._tax_number)
+        self.tags[0x03] = str(self._date)
+        self.tags[0x04] = str(self._total)
+        self.tags[0x05] = str(self._tax_amount)
+        
         tlv_as_byte_array = self.tags.to_byte_array()
 
         tlv_as_base64 = base64.b64encode(tlv_as_byte_array)
@@ -98,6 +130,7 @@ class PyFatoora:
         qr_code_img = qrcode.make(base64_tlv)
         return qr_code_img
 
+    @validate_arguments
     def base64_to_tlv(self, base64_string: str) -> dict:
         """
         decode tlv values to string and return a dict
@@ -116,7 +149,9 @@ class PyFatoora:
             tag_value = str(tags[tag]).replace("b'", "").replace("'", "")
             seller_info[str(tag)] = tag_value
         return seller_info
-
+    
+    @classmethod
+    @validate_arguments
     def read_qrcode_image(self, image_url:str) -> dict:
         """
         extract seller information from qr-code image.
