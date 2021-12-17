@@ -1,6 +1,4 @@
 from pyfatoora.api import app
-from fastapi.responses import FileResponse
-from pyfatoora.info import InvoiceData
 from fastapi.testclient import TestClient
 
 
