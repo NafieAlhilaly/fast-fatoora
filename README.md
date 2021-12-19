@@ -61,7 +61,7 @@ https://api-fatoora.herokuapp.com/to_qrcode_image?seller_name=Nafi&tax_number=98
 [Try it](https://api-fatoora.herokuapp.com/to_qrcode_image?seller_name=Nafi&tax_number=981293479834&total=100.00&tax_amount=0.50&date=2021-12-06%2016%3A14%3A17.374909
 )
 
-### Fill E-Invoice(fatoora)
+### Full E-Invoice(fatoora)
 Use /full_fatoora to get e-invoice with qrcode image
 ```
 Parameter :
