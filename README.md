@@ -45,7 +45,7 @@ https://api-fatoora.herokuapp.com/to_base64?seller_name=Nafie&tax_number=9812934
 [Try it](https://api-fatoora.herokuapp.com/to_base64?seller_name=Nafie&tax_number=981293479834&total=100.00&tax_amount=0.50&date=2021-12-06%2016%3A14%3A17.374909)
 
 ### To QR-Code image
-Use /to_qrcode_image to generate QR-COde image
+Use /to_qrcode_image to generate QR-Code image
 ```
 Parameter :
   seller_name: required
