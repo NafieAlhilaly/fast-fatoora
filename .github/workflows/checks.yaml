@@ -19,4 +19,4 @@ jobs:
     - name: test with pytest
       run: |
         pip install pytest
-        python3 setup.py tests
+        pytest
