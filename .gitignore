@@ -3,3 +3,4 @@ test_req.py
 test_req.js
 .pytest_cache
 .vscode
+poetry.lock
