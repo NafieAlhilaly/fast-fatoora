@@ -1,0 +1,45 @@
+[tool.poetry]
+name = "fatoora_dependencies"
+version = "0.1.0"
+description = ""
+authors = ["Nafie <warrior259@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+fastapi = "^0.70.1"
+uttlv = "0.6.0"
+opencv-python-headless = "4.5.4.58"
+requests = "^2.27.1"
+uvicorn = "^0.16.0"
+qrcode = "^7.3.1"
+Pillow = "^9.0.0"
+Jinja2 = "^3.0.3"
+python-multipart = "^0.0.5"
+pyzbar = "^0.1.8"
+qrtools = "^0.0.2"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+black = "^21.12b0"
+pre-commit = "^2.16.0"
+flake8 = "^4.0.1"
+
+[tool.black]
+line-length = 79
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
