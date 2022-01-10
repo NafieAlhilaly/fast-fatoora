@@ -1,14 +1,14 @@
 """
 A module to implement ZATCA e-invoice (fatoora)
-it will convert seller information to TLV tags, 
+it will convert seller information to TLV tags,
 then to hexadecimal representation finally to base64 encoding.
 
 from base64 encoding result we can render RQ-code
 
 The minimum seller inforamion required are :
 
-- Seller’s name.
-- Seller’s tax number.
+- Seller`s name.
+- Seller`s tax number.
 - Invoice date.
 - Invoice total amount.
 - Tax amount.
@@ -18,26 +18,27 @@ from typing import Optional, Union
 from uttlv import TLV
 import base64
 import qrcode
-from PIL import Image
 import datetime
-from pyzbar.pyzbar import decode
 from pydantic import validate_arguments
 
 
 class PyFatoora:
     """
-    This class will help transform given seller information 
+    This class will help transform given seller information
     to a QR-code image as part of ZATCA requirements for implementation of
     e-invoice (fatoora).
     """
+
     tags = TLV()
 
-    def __init__(self,
-                 seller_name: Optional[str] = None,
-                 tax_number: Optional[int] = None,
-                 invoice_date: Optional[str] = None,
-                 total_amount: Optional[float] = 0.00,
-                 tax_amount: Optional[float] = 0.00):
+    def __init__(
+        self,
+        seller_name: Optional[str] = None,
+        tax_number: Optional[int] = None,
+        invoice_date: Optional[str] = None,
+        total_amount: Optional[float] = 0.00,
+        tax_amount: Optional[float] = 0.00,
+    ):
         self._seller_name = seller_name
         self._tax_number = tax_number
         self._date = invoice_date
@@ -45,7 +46,7 @@ class PyFatoora:
         self._tax_amount = tax_amount
 
     @property
-    def seller_name(self)  -> str:
+    def seller_name(self) -> str:
         return self._seller_name
 
     @seller_name.setter
@@ -61,7 +62,7 @@ class PyFatoora:
     @validate_arguments
     def tax_nmuber(self, tax_nmuber: int) -> None:
         self._tax_nmuber = tax_nmuber
-    
+
     @property
     def date(self) -> str:
         return self._date
@@ -89,15 +90,14 @@ class PyFatoora:
     def tax_amount(self, tax_amount: float) -> None:
         self._tax_amount = tax_amount
 
-    
     def get_info(self) -> dict:
-        
+
         info: dict = {
             "seller_name": self._seller_name,
             "tax_number": self._tax_number,
             "invoice_date": self._date,
             "total_amount": self._total,
-            "tax_amount": self._tax_amount
+            "tax_amount": self._tax_amount,
         }
         return info
 
@@ -111,14 +111,13 @@ class PyFatoora:
         self.tags[0x03] = str(self._date)
         self.tags[0x04] = str(self._total)
         self.tags[0x05] = str(self._tax_amount)
-        
+
         tlv_as_byte_array = self.tags.to_byte_array()
 
         tlv_as_base64 = base64.b64encode(tlv_as_byte_array)
         tlv_as_base64 = tlv_as_base64.decode("ascii")
 
         return tlv_as_base64
-
 
     def render_qrcode_image(self) -> qrcode:
         """
@@ -138,7 +137,7 @@ class PyFatoora:
         :param: base64_string: tlv tags as base64
         :return: dict
         """
-    
+
         decoded_tlv_data = base64.b64decode(base64_string)
 
         tags = TLV()
@@ -149,20 +148,16 @@ class PyFatoora:
             tag_value = str(tags[tag]).replace("b'", "").replace("'", "")
             seller_info[str(tag)] = tag_value
         return seller_info
-    
+    """
+    need fix :
     @classmethod
     @validate_arguments
-    def read_qrcode_image(self, image_url:str) -> dict:
-        """
+    def read_qrcode_image(self, image_url) -> dict:
         extract seller information from qr-code image.
-
-        :param image_url: 
+        :param image_url:
             a qr-code image path or url
-        
         :return:
             dictionary contains decoded seller information
-        """
         data = decode(Image.open(image_url))
         extracted_info = self.base64_to_tlv(data[0][0])
-
-        return extracted_info
+        return extracted_info"""
