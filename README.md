@@ -1,7 +1,7 @@
-[![GitHub stars](https://img.shields.io/github/stars/NafieAlhilaly/api-fatoora)](https://github.com/NafieAlhilaly/api-fatoora/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/NafieAlhilaly/api-fatoora)](https://github.com/NafieAlhilaly/api-fatoora/network)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![GitHub license](https://img.shields.io/github/license/NafieAlhilaly/api-fatoora)](https://github.com/NafieAlhilaly/api-fatoora/blob/main/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/NafieAlhilaly/api-fatoora?style=for-the-badge&logo=appveyor)](https://github.com/NafieAlhilaly/api-fatoora/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/NafieAlhilaly/api-fatoora?style=for-the-badge&logo=appveyor)](https://github.com/NafieAlhilaly/api-fatoora/network)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=for-the-badge&logo=appveyor)](https://github.com/psf/black)
+[![GitHub license](https://img.shields.io/github/license/NafieAlhilaly/api-fatoora?style=for-the-badge&logo=appveyor)](https://github.com/NafieAlhilaly/api-fatoora/blob/main/LICENSE)
 
 # api-fatoora
 
