@@ -9,7 +9,7 @@
 # fast-fatoora
 
 <p align="center">
-  <img align="center" src="https://github.com/NafieAlhilaly/api-fatoora/blob/main/images/full_E-invoice.jpg" width=300/>
+  <img align="center" src="https://github.com/NafieAlhilaly/fast-fatoora/blob/main/images/fast-fatooea-logo.jpeg" width=300/>
 </p>
 
 You can try it with simple ui @ [Heroku](https://api-fatoora.herokuapp.com/)
