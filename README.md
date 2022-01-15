@@ -12,7 +12,7 @@
   <img align="center" src="https://github.com/NafieAlhilaly/api-fatoora/blob/main/images/full_E-invoice.jpg" width=300/>
 </p>
 
-You can try it with simple ui @ [api-fatoora](https://api-fatoora.herokuapp.com/)
+You can try it with simple ui @ [Heroku](https://api-fatoora.herokuapp.com/)
 
 
 fast-fatoora is an open API to help generating QR-code for [ZATCA's e-invoice known as "Fatoorah"](https://zatca.gov.sa/en/E-Invoicing/Introduction/Pages/What-is-e-invoicing.aspx) 
