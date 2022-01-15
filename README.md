@@ -1,3 +1,9 @@
+<p align="center">
+  <img align="center" src="https://github.com/NafieAlhilaly/fast-fatoora/blob/main/images/fast-fatooea-logo.jpeg" width=300/>
+</p>
+
+---------
+
 [![GitHub stars](https://img.shields.io/github/stars/NafieAlhilaly/api-fatoora?style=for-the-badge&logo=appveyor)](https://github.com/NafieAlhilaly/api-fatoora/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/NafieAlhilaly/api-fatoora?style=for-the-badge&logo=appveyor)](https://github.com/NafieAlhilaly/api-fatoora/network)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=for-the-badge&logo=appveyor)](https://github.com/psf/black)
@@ -8,9 +14,6 @@
 
 # fast-fatoora
 
-<p align="center">
-  <img align="center" src="https://github.com/NafieAlhilaly/fast-fatoora/blob/main/images/fast-fatooea-logo.jpeg" width=300/>
-</p>
 
 You can try it with simple ui @ [Heroku](https://api-fatoora.herokuapp.com/)
 
