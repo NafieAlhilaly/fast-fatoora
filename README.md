@@ -2,6 +2,8 @@
 [![GitHub forks](https://img.shields.io/github/forks/NafieAlhilaly/api-fatoora?style=for-the-badge&logo=appveyor)](https://github.com/NafieAlhilaly/api-fatoora/network)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=for-the-badge&logo=appveyor)](https://github.com/psf/black)
 [![GitHub license](https://img.shields.io/github/license/NafieAlhilaly/api-fatoora?style=for-the-badge&logo=appveyor)](https://github.com/NafieAlhilaly/api-fatoora/blob/main/LICENSE)
+[![ZATCA](https://img.shields.io/badge/ZATCA-Fatoora-green?style=for-the-badge&logo=appveyor)](https://zatca.gov.sa/ar/E-Invoicing/Introduction/Pages/What-is-e-invoicing.aspx)
+
 
 # api-fatoora
 
