@@ -1,5 +1,5 @@
 <p align="center">
-  <img align="center" src="https://github.com/NafieAlhilaly/fast-fatoora/blob/main/images/fast-fatooea-logo.jpeg" width=300/>
+  <img align="center" src="https://github.com/NafieAlhilaly/fast-fatoora/blob/main/images/fast-fatoora-logo.png" width=300/>
 </p>
 
 ---------
