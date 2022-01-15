@@ -4,12 +4,12 @@
 
 ---------
 
-[![GitHub stars](https://img.shields.io/github/stars/NafieAlhilaly/api-fatoora?style=for-the-badge&logo=appveyor)](https://github.com/NafieAlhilaly/api-fatoora/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/NafieAlhilaly/api-fatoora?style=for-the-badge&logo=appveyor)](https://github.com/NafieAlhilaly/api-fatoora/network)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=for-the-badge&logo=appveyor)](https://github.com/psf/black)
-[![GitHub license](https://img.shields.io/github/license/NafieAlhilaly/api-fatoora?style=for-the-badge&logo=appveyor)](https://github.com/NafieAlhilaly/api-fatoora/blob/main/LICENSE)
-[![ZATCA](https://img.shields.io/badge/ZATCA-Fatoora-green?style=for-the-badge&logo=appveyor)](https://zatca.gov.sa/ar/E-Invoicing/Introduction/Pages/What-is-e-invoicing.aspx)
-[![FastAPI](https://img.shields.io/badge/FastAPI-%E2%9D%A4%EF%B8%8F-brightgreen?style=for-the-badge&logo=appveyor)](https://fastapi.tiangolo.com/)
+[![GitHub stars](https://img.shields.io/github/stars/NafieAlhilaly/api-fatoora?style=for-the-badge&logo=github)](https://github.com/NafieAlhilaly/api-fatoora/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/NafieAlhilaly/api-fatoora?style=for-the-badge&logo=github)](https://github.com/NafieAlhilaly/api-fatoora/network)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg?style=for-the-badge&logo=python)](https://github.com/psf/black)
+[![GitHub license](https://img.shields.io/github/license/NafieAlhilaly/api-fatoora?style=for-the-badge&logo=github)](https://github.com/NafieAlhilaly/api-fatoora/blob/main/LICENSE)
+[![ZATCA](https://img.shields.io/badge/ZATCA-Fatoora-green?style=for-the-badge)](https://zatca.gov.sa/ar/E-Invoicing/Introduction/Pages/What-is-e-invoicing.aspx)
+[![FastAPI](https://img.shields.io/badge/FastAPI-%E2%9D%A4%EF%B8%8F-brightgreen?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
 [![Heroku](https://img.shields.io/badge/Heroku-fast--fatoora-blue?style=for-the-badge&logo=heroku)](https://api-fatoora.herokuapp.com)
 
 # fast-fatoora
@@ -91,3 +91,30 @@ https://api-fatoora.herokuapp.com/full_fatoora?seller_name=Nafie&tax_number=9812
 [Try it](https://api-fatoora.herokuapp.com/full_fatoora?seller_name=Nafie&tax_number=981293479834&total=100.00&tax_amount=0.50&date=2021-12-06%2016%3A14%3A17.374909&fat_number=5837
 )
 
+# Devolepment
+To start your local devolepment 
+### clone repo
+```bash
+git clone https://github.com/NafieAlhilaly/fast-fatoora.git
+
+```
+```bash
+cd fast-fatoora
+
+```
+### install dependencies
+using pip:
+```bash
+pip install -r requirements.txt
+```
+
+using poetry(recommended):
+```bash
+poerty install
+```
+
+### run the local devolepment server
+```bash
+python app/main.py
+```
+server will run on https://127.0.0.1:8000
