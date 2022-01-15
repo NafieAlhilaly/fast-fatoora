@@ -10,7 +10,7 @@
 [![GitHub license](https://img.shields.io/github/license/NafieAlhilaly/api-fatoora?style=for-the-badge&logo=appveyor)](https://github.com/NafieAlhilaly/api-fatoora/blob/main/LICENSE)
 [![ZATCA](https://img.shields.io/badge/ZATCA-Fatoora-green?style=for-the-badge&logo=appveyor)](https://zatca.gov.sa/ar/E-Invoicing/Introduction/Pages/What-is-e-invoicing.aspx)
 [![FastAPI](https://img.shields.io/badge/FastAPI-%E2%9D%A4%EF%B8%8F-brightgreen?style=for-the-badge&logo=appveyor)](https://fastapi.tiangolo.com/)
-
+[![Heroku App Status](http://heroku-shields.herokuapp.com/fast-fatoora?style=for-the-badge&logo=appveyor)](https://api-fatoora.herokuapp.com)
 
 # fast-fatoora
 
