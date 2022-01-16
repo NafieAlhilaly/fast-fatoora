@@ -145,7 +145,11 @@ class PyFatoora:
 
         seller_info = {}
         for tag in tags:
+<<<<<<< HEAD
             seller_info[str(tag)] = tags[tag].decode("utf-8")
+=======
+            seller_info[str(tag)] = str(tags[tag])
+>>>>>>> 151fdf101de2b61ad5b954c494c827d64b6097b3
         return seller_info
     """
     need fix :
