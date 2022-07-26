@@ -14,16 +14,13 @@
 
 # fast-fatoora
 
-
-You can try it with simple ui @ [Heroku](https://api-fatoora.herokuapp.com/)
-
-
 fast-fatoora is an open API to help generating QR-code for [ZATCA's e-invoice known as "Fatoorah"](https://zatca.gov.sa/en/E-Invoicing/Introduction/Pages/What-is-e-invoicing.aspx) 
-
-
-
-
+You can try it with simple ui @ [Heroku](https://api-fatoora.herokuapp.com/)
 full API [documentations](https://api-fatoora.herokuapp.com/docs) 
+
+## Business
+Wanna create a custom API for your business ? Please contact me on [Linkedin](https://www.linkedin.com/in/nafie-alhilaly/) 😉
+
 
 
 ---------
